@@ -1,0 +1,10 @@
+Running "flutter pub get" in flutter_tools...                   
+This crash may already be reported. Check GitHub for similar crashes.
+https://github.com/flutter/flutter/issues?q=is%3Aissue+ProcessException%3A+The+directory+name+is+invalid.%0D%0A%0A++Command%3A+C%3A%5Cflutter%5Cbin%5Ccache%5Cdart-sdk%5Cbin%5Cpub.bat+--verbosity%3Dwarning+get+--no-precompile
+
+To report your crash to the Flutter team, first read the guide to filing a bug.
+https://flutter.dev/docs/resources/bug-reports
+
+Create a new GitHub issue by pasting this link into your browser and completing the issue template. Thank you!
+https://git.io/JcVdO
+
