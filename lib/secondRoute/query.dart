@@ -1,7 +1,12 @@
 
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
 class query extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -9,8 +14,9 @@ class query extends StatefulWidget{
   }
 }
 class addQuery extends State<query>{
+ // final Telephony telephony=Telephony.instance;
 
-  var _formKey=GlobalKey<FormState>();
+  var  _formKey=GlobalKey<FormState>();
 
   TextEditingController nameControl=TextEditingController();
   TextEditingController emailControl=TextEditingController();
@@ -18,11 +24,26 @@ class addQuery extends State<query>{
   TextEditingController queryControl=TextEditingController();
   var displayResult=" ";
   var _minimumPadding=5.0;
+  //int no=8888585093;
+ // late DatabaseReference _ref;
+
+  // void initState(){
+  //   super.initState();
+  //   _ref=FirebaseDatabase.instance.reference().child('Village Project');
+  // }
 
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle= Theme.of(context).textTheme.title;
-    return Scaffold(
+    return
+     Scaffold(
+         floatingActionButton: FloatingActionButton(
+           onPressed: (){
+             Navigator.pop(context);
+           },
+           child:Icon(Icons.arrow_back),
+
+         ),
       appBar: AppBar(
         title: Text("तक्रार लिहा",),
       ),
@@ -31,6 +52,38 @@ class addQuery extends State<query>{
         child: Padding(padding: EdgeInsets.all(_minimumPadding*4),
       child : ListView(
         children: [
+          Container(height: 10,),
+
+          Image.asset("images/mail.jpg"),
+
+
+          InkWell(
+            child: ElevatedButton(onPressed: () async{
+              await launch('mailto: jayeshsevatkar@gmail.com ');
+            },
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(20),
+
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
+              child:
+              Text("Sent Mail to Sarpanch",style: TextStyle(fontSize: 20,fontFamily: "times new roman"),),
+            ),
+          ),
+          Container(height: 10,),
+
+          Container(
+            color: Colors.white,
+            alignment: Alignment.center,
+            child: ListTile(
+              leading: Icon(Icons.arrow_downward_outlined,color: Colors.red,),
+              title: Text("हा फॉर्म तात्पुरता बंद करण्यात आला आहे कृपया तक्रार असल्यास वरील बटन वर क्लिक करू ग्रामपंचायत ला ई-मेल करा ",
+                style: TextStyle(fontFamily: "times new roman",color:Colors.red ,fontWeight: FontWeight.bold),),
+            )
+          ),
+
+          Container(height: 10,),
+
           Container(
             color: Colors.greenAccent,
             alignment: Alignment.center,
@@ -45,6 +98,7 @@ class addQuery extends State<query>{
             child: Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                enabled: false,
                 style: textStyle,
                 controller: nameControl,
                 validator: (value) {
@@ -71,6 +125,7 @@ class addQuery extends State<query>{
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: TextFormField(
+              enabled: false,
               style: textStyle,
               controller: emailControl,
               validator: (value) {
@@ -97,6 +152,7 @@ class addQuery extends State<query>{
 
             padding: const EdgeInsets.only(top: 10.0),
             child: TextFormField(
+              enabled: false,
               style: textStyle,
               controller: phoneControl,
               validator: (value) {
@@ -122,6 +178,7 @@ class addQuery extends State<query>{
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: TextFormField(
+              enabled: false,
               style: textStyle,
               maxLines: 8,
               controller: queryControl,
@@ -148,13 +205,17 @@ class addQuery extends State<query>{
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: RaisedButton(onPressed: (){
-            setState(() {
+           // setState(() {
+
+           //  return setSMS();
+              // saveHere();
               if(_formKey.currentState!.validate()){
                 this.displayResult= _getInfo();
               }
 
-            });
+          //  });
           },
+            autofocus: false,
             color: Theme.of(context).accentColor,
             textColor: Theme.of(context).primaryColorLight,
           child: Text("पाठवा",style: TextStyle(fontFamily: "times new roman",color: Colors.white),textScaleFactor: 1.5,),
@@ -177,5 +238,25 @@ class addQuery extends State<query>{
     String result="Query Successfully Submitted";
     return result;
   }
+
+  //  setSMS() async{
+  //   telephony.sendSms(to: phoneControl.text , message: queryControl.text);
+  // }
+  //
+
+  // void saveHere() {
+  //   String name=nameControl.text;
+  //   String email=emailControl.text;
+  //   String phone=phoneControl.text;
+  //   String query=queryControl.text;
+  //
+  //   Map<String,String> contact={
+  //     'name':name,
+  //     'email':email,
+  //     'phone':'+91'+phone,
+  //     'query':query,
+  //   };
+  //   _ref.push().set(contact);
+  // }
 
 }
